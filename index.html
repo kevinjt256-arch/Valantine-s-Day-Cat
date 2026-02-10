@@ -1,0 +1,55 @@
+<script>
+const questions = [
+  "Hey beautiful",
+  "I have something important to ask you",
+  "You make my days better",
+  "So…"
+];
+
+let step = 0;
+
+const questionEl = document.getElementById("question");
+const controlsEl = document.getElementById("controls");
+const nextBtn = document.getElementById("nextBtn");
+const catEl = document.getElementById("cat");
+const musicEl = document.getElementById("music");
+
+nextBtn.onclick = () => {
+  step++;
+  if (step < questions.length) {
+    questionEl.textContent = questions[step];
+  } else {
+    showYesNo();
+  }
+};
+
+function showYesNo() {
+  questionEl.textContent = "Will you be my Valentine?";
+  controlsEl.innerHTML = `
+    <button id="yesBtn">Yes ♥</button>
+    <button id="noBtn">No</button>
+  `;
+
+  document.getElementById("yesBtn").onclick = finalReveal;
+
+  const noBtn = document.getElementById("noBtn");
+  noBtn.onmouseover = () => {
+    noBtn.style.transform =
+      "translate(" +
+      (Math.random() * 200 - 100) +
+      "px," +
+      (Math.random() * 200 - 100) +
+      "px)";
+  };
+}
+
+function finalReveal() {
+  // ✅ Play music normally from start to end
+  musicEl.currentTime = 0;
+  musicEl.play();
+
+  questionEl.textContent = "Yay!!! I love you ♥";
+  controlsEl.style.display = "none";
+  catEl.style.display = "block";
+}
+</script>
