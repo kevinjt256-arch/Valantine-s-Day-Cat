@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For You ♥</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #ffd6e8, #fff0f5);
+      padding: 60px 20px;
+    }
+
+    h1 {
+      color: #b3005e;
+    }
+
+    button {
+      font-size: 1.1rem;
+      padding: 12px 24px;
+      margin: 10px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    #yesBtn {
+      background: #ff4d88;
+      color: white;
+    }
+
+    #noBtn {
+      background: #ccc;
+    }
+
+    #cat {
+      display: none;
+      margin-top: 30px;
+      width: 280px;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h1 id="text">Hey beautiful</h1>
+
+<div id="controls">
+  <button id="nextBtn">Next</button>
+</div>
+
+<img id="cat" src="cat.jpg" alt="Cat">
+
+<audio id="music" src="music.mp3"></audio>
+
+<script>
+const messages = [
+  "Hey beautiful",
+  "I have something important to ask you",
+  "You make my days better",
+  "So…"
+];
+
+let index = 0;
+
+const text = document.getElementById("text");
+const controls = document.getElementById("controls");
+const nextBtn = document.getElementById("nextBtn");
+const music = document.getElementById("music");
+const cat = document.getElementById("cat");
+
+nextBtn.onclick = () => {
+  index++;
+  if (index < messages.length) {
+    text.textContent = messages[index];
+  } else {
+    showChoice();
+  }
+};
+
+function showChoice() {
+  text.textContent = "Will you be my Valentine?";
+  controls.innerHTML = "";
+
+  const yes = document.createElement("button");
+  yes.id = "yesBtn";
+  yes.innerHTML = 'Yes <span style="color:white">♥</span>';
+  yes.onclick = yesClicked;
+
+  const no = document.createElement("button");
+  no.id = "noBtn";
+  no.textContent = "No";
+  no.onmouseover = () => {
+    no.style.transform =
+      "translate(" +
+      (Math.random() * 200 - 100) +
+      "px," +
+      (Math.random() * 200 - 100) +
+      "px)";
+  };
+
+  controls.appendChild(yes);
+  controls.appendChild(no);
+}
+
+function yesClicked() {
+  // Start music directly from user click
+  music.volume = 0.8;
+  music.currentTime = 0;
+  music.play();
+
+  text.textContent = "Yay!!! I love you ♥";
+  controls.style.display = "none";
+  cat.style.display = "block";
+}
+</script>
+
+</body>
+</html>
