@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 60px 20px;
+      background: #ffe6f0;
+    }
+
+    button {
+      padding: 12px 24px;
+      margin: 10px;
+      font-size: 1.1rem;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
+    }
+
+    #yesBtn {
+      background: #ff4d88;
+      color: white;
+    }
+
+    #noBtn {
+      background: #ccc;
+    }
+
+    #cat {
+      display: none;
+      margin-top: 30px;
+      width: 280px;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h1 id="question">Hey beautiful</h1>
+
+<div id="controls">
+  <button id="nextBtn">Next</button>
+</div>
+
+<img id="cat" src="cat.jpg" alt="Cat">
+
+<audio id="music" src="music.mp3"></audio>
+
+<script>
+const lines = [
+  "Hey beautiful",
+  "I have something important to ask you",
+  "You make my days better",
+  "So…"
+];
+
+let i = 0;
+
+const question = document.getElementById("question");
+const controls = document.getElementById("controls");
+const nextBtn = document.getElementById("nextBtn");
+const cat = document.getElementById("cat");
+const music = document.getElementById("music");
+
+nextBtn.onclick = function () {
+  i++;
+  if (i < lines.length) {
+    question.textContent = lines[i];
+  } else {
+    showChoice();
+  }
+};
+
+function showChoice() {
+  question.textContent = "Will you be my Valentine?";
+  controls.innerHTML = "";
+
+  const yes = document.createElement("button");
+  yes.id = "yesBtn";
+  yes.textContent = "Yes ♥";
+  yes.onclick = yesClicked;
+
+  const no = document.createElement("button");
+  no.id = "noBtn";
+  no.textContent = "No";
+  no.onmouseover = function () {
+    no.style.transform =
+      "translate(" +
+      (Math.random() * 200 - 100) +
+      "px," +
+      (Math.random() * 200 - 100) +
+      "px)";
+  };
+
+  controls.appendChild(yes);
+  controls.appendChild(no);
+}
+
+function yesClicked() {
+  music.currentTime = 0;
+  music.play();
+
+  question.textContent = "Yay!!! I love you ♥";
+  controls.style.display = "none";
+  cat.style.display = "block";
+}
+</script>
+
+</body>
+</html>
